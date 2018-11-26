@@ -1,0 +1,180 @@
+自助下单系统客户端API文档
+
+
+【获取网站信息】
+/api.php?act=siteinfo
+
+返回格式：
+{
+    "sitename": "网站名称",
+    "kfqq": "客服QQ",
+    "anounce": "首页公告",
+    "modal": "首页弹出公告",
+    "bottom": "首页底部排版",
+    "gg_search": "订单查询页面公告",
+    "version": "版本号",
+    "build": "建站时间",
+    "orders": "订单数量",
+    "orders1": "已处理的订单",
+    "sites": "分站数量"
+}
+
+【获取商品分类】
+/ajax.php?act=getclass
+
+返回格式：
+{
+    "code": 0,
+    "msg": "succ",
+    "data": [
+        {
+            "cid": "分类ID",
+            "zid": "站点ID",
+            "sort": "排序",
+            "name": "分类名称",
+            "active": "是否上架"
+        },
+        {
+            …第二条，同上…
+        },
+        ……
+    ]
+}
+
+
+【获取商品列表】
+/ajax.php?act=gettool&cid={分类ID}
+
+返回格式：
+{
+    "code": 0,
+    "msg": "succ",
+    "data": [
+        {
+            "tid": "商品ID",
+            "sort": "排序",
+            "name": "商品名称",
+            "value": "默认数量信息",
+            "price": "商品价格",
+	    "input": "第一个输入框标题，如果留空默认为下单ＱＱ",
+	    "inputs": "更多输入框标题，用|分隔",
+	    "alert": "提示内容",
+	    "repeat": "是否允许重复下单",
+	    "multi": "是否显示数量选择框"
+        },
+        {
+            …第二条，同上…
+        },
+        ……
+    ]
+}
+
+
+【提交下单】
+/api.php?act=pay
+
+POST数据：tid={商品ID}&inputvalue={第一个输入框内容}&inputvalue2={第二个}&inputvalue3={第三个}&inputvalue4={第四个}&inputvalue5={第五个}&num={购买数量}
+
+参数说明：
+输入框如果不存在请不要传输相应的参数
+
+返回格式：
+{
+    "code": 0,
+    "msg": "提示信息",
+    "trade_no": "订单号",
+    "need": "所需金额"
+}
+
+
+【发起支付】
+/other/submit.php?type={支付方式}&orderid={订单号}
+
+参数说明：
+--支付方式
+----alipay:支付宝
+----qqpay:QQ钱包
+----wxpay:微信支付
+----tenpay:财付通
+
+
+【检查卡密信息】
+/api.php?act=checkkm
+
+POST数据：km={卡密}&inputvalue={第一个输入框内容}&inputvalue2={第二个}&inputvalue3={第三个}&inputvalue4={第四个}&inputvalue5={第五个}
+
+返回格式：
+{
+    "code": 0,
+    "msg": "提示信息"
+}
+
+
+【卡密下单】
+/api.php?act=checkkm
+
+POST数据：km={卡密}&qq={下单账号}
+
+返回格式：
+{
+    "code": 0,
+    "msg": "提示信息",
+    "tid": "商品ID",
+    "cid": "分类ID",
+    "name": "商品名称",
+    "alert": "提示信息",
+    "inputname": "第一个输入框标题，如果留空默认为下单ＱＱ",
+    "inputsname": "更多输入框标题，用|分隔"
+}
+
+
+【查询订单】
+/ajax.php?act=query
+
+POST数据：qq={要查询的下单账号}
+
+返回格式：
+{
+    "code": 0,
+    "msg": "succ",
+    "data": [
+        {
+	    "id": "订单ID",
+            "tid": "商品ID",
+            "input": "下单账号",
+            "name": "商品名称",
+            "value": "下单份数",
+            "addtime": "下单时间",
+	    "endtime": "完成时间",
+	    "result": "异常原因(异常状态才显示)",
+	    "status": "状态(0:待处理,1:已完成,2:正在处理,3:异常)"
+        },
+        {
+            …第二条，同上…
+        },
+        ……
+    ]
+}
+
+
+【提交补单】
+/api.php?act=fill
+
+POST数据：orderid={订单ID}
+
+返回格式：
+{
+    "code": 0,
+    "msg": "提示信息"
+}
+
+
+【获取说说列表】
+/api.php?act=getshuoshuo&uin={QQ号}
+
+返回格式：
+{
+    "code": 0,
+    "msg": "提示信息",
+    "data": [说说列表]
+}

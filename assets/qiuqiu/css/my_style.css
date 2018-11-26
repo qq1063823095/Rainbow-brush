@@ -1,0 +1,28 @@
+.weui-footer__link {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 .62em;
+    position: relative;
+    font-size: 14px;
+}
+.weui-footer__link:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    bottom: 0;
+    border-left: 1px solid #C7C7C7;
+    color: #C7C7C7;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleX(0.5);
+    transform: scaleX(0.5);
+    left: -0.65em;
+    top: .36em;
+    bottom: .36em;
+}
+.weui-footer__link:first-child:before {
+    display: none;
+}
+.sel{padding:6px 0;}
